@@ -15,10 +15,16 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('book_id');
+            $table->unsignedBigInteger('book_id');
             $table->unsignedInteger('number');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('book_id')
+                ->references('id')
+                ->on('books')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -29,6 +35,9 @@ class CreateStocksTable extends Migration
      */
     public function down()
     {
+        Schema::table('stocks', function (Blueprint $table){
+           $table->dropForeign(['book_id']);
+        });
         Schema::dropIfExists('stocks');
     }
 }

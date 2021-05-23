@@ -15,10 +15,16 @@ class CreateRatingsTable extends Migration
     {
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('book_id');
+            $table->unsignedBigInteger('book_id');
             $table->unsignedInteger('rate');
             $table->softDeletes();
             $table->timestamps();
+
+            $table->foreign('book_id')
+                ->references('id')
+                ->on('books')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
     }
 
@@ -29,6 +35,9 @@ class CreateRatingsTable extends Migration
      */
     public function down()
     {
+        Schema::table('ratings', function (Blueprint $table){
+            $table->dropForeign(['book_id']);
+        });
         Schema::dropIfExists('ratings');
     }
 }
