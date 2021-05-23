@@ -22,11 +22,11 @@ class BookFactory extends Factory
      */
     public function definition()
     {
-        $usersId = User::query()->pluck('id')->toArray();
-        $randomArray = Arr::random($usersId);
+//        $usersId = User::query()->pluck('id')->toArray();
+//        $randomArray = Arr::random($usersId);
         return [
             'title' => $this->faker->title(),
-            'user_id' => $randomArray,
+//            'user_id' => $randomArray,
             'author' => $this->faker->name(),
             'publisher' => $this->faker->name(),
             'year' => $this->faker->year(),

@@ -22,4 +22,9 @@ class Book extends Model
     {
         return $this->hasOne(Stock::class, 'book_id' , 'id');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

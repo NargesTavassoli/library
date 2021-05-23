@@ -1,7 +1,9 @@
 <?php namespace Database\Seeders;
 
 use App\Models\Book;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Schema;
 
 class BooksTableSeeder extends Seeder
@@ -16,8 +18,13 @@ class BooksTableSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
 
         Book::query()->truncate();
-        Book::factory(10)->create();
 
+        $userIds = User::pluck('id')->toArray();
+        for ($i=0 ; $i<=20 ; $i++ ){
+            Book::factory()->create([
+                'user_id'=> Arr::random($userIds)
+            ]);
+    }
         Schema::enableForeignKeyConstraints();
     }
 }
