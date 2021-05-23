@@ -16,6 +16,7 @@ class CreateRatingsTable extends Migration
         Schema::create('ratings', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedInteger('rate');
             $table->softDeletes();
             $table->timestamps();
@@ -25,7 +26,15 @@ class CreateRatingsTable extends Migration
                 ->on('books')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade')
+                ->onUpdate('cascade');
         });
+
+
     }
 
     /**

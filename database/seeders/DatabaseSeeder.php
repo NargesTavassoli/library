@@ -1,5 +1,6 @@
 <?php namespace Database\Seeders;
 
+use App\Models\Book;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
@@ -17,6 +18,7 @@ class DatabaseSeeder extends Seeder
 
         User::query()->truncate();
         User::factory(10)->create();
+//        Book::factory(10)->create();
 
          Schema::enableForeignKeyConstraints();
     }

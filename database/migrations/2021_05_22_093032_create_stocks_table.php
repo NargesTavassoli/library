@@ -15,7 +15,7 @@ class CreateStocksTable extends Migration
     {
         Schema::create('stocks', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('book_id');
+            $table->unsignedBigInteger('book_id')->unique();
             $table->unsignedInteger('number');
             $table->softDeletes();
             $table->timestamps();
