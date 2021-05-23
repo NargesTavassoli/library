@@ -21,8 +21,10 @@ class CreateBooksTable extends Migration
             $table->string('publisher');
             $table->year('year');
             $table->unsignedInteger('price');
+            $table->boolean('validation')->default(0);
             $table->softDeletes();
             $table->timestamps();
+
 
             $table->foreign('user_id')
                 ->references('id')

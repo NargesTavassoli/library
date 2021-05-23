@@ -1,13 +1,13 @@
 <?php namespace Database\Seeders;
 
-use App\Models\User;
+use App\Models\Book;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Schema;
 
-class DatabaseSeeder extends Seeder
+class BooksTableSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
@@ -15,9 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         Schema::disableForeignKeyConstraints();
 
-        User::query()->truncate();
-        User::factory(10)->create();
+        Book::query()->truncate();
+        Book::factory(10)->create();
 
-         Schema::enableForeignKeyConstraints();
+        Schema::enableForeignKeyConstraints();
     }
 }
