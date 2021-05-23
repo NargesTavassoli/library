@@ -17,4 +17,9 @@ class Book extends Model
         'year',
         'price',
     ];
+
+    public function stock()
+    {
+        return $this->hasOne(Stock::class, 'book_id' , 'id');
+    }
 }
