@@ -15,8 +15,6 @@ class BooksTableSeeder extends Seeder
      */
     public function run()
     {
-        Schema::disableForeignKeyConstraints();
-
         Book::query()->truncate();
 
         $userIds = User::pluck('id')->toArray();
@@ -24,7 +22,6 @@ class BooksTableSeeder extends Seeder
             Book::factory()->create([
                 'user_id'=> Arr::random($userIds)
             ]);
-    }
-        Schema::enableForeignKeyConstraints();
+        }
     }
 }

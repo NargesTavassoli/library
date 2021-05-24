@@ -22,7 +22,6 @@ class StockFactory extends Factory
     public function definition()
     {
         return [
-        //    'book_id' => $randomArray,
             'number' => $this->faker->numberBetween('1', '20'),
         ];
     }

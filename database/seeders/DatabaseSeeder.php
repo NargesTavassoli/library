@@ -18,7 +18,10 @@ class DatabaseSeeder extends Seeder
 
         User::query()->truncate();
         User::factory(10)->create();
-//        Book::factory(10)->create();
+
+        $this->call(BooksTableSeeder::class);
+        $this->call(StocksTableSeeder::class);
+        $this->call(RatingsTableSeeder::class);
 
          Schema::enableForeignKeyConstraints();
     }

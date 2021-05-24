@@ -17,7 +17,7 @@ class StocksTableSeeder extends Seeder
     {
         Stock::query()->truncate();
         $bookIds = Book::pluck('id')->toArray();
-//        dd($bookIds);
+
         foreach ($bookIds as $bookId){
             Stock::factory()->create([
                 'book_id'=> $bookId
