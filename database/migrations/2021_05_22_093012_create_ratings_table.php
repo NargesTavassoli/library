@@ -17,6 +17,7 @@ class CreateRatingsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('book_id');
             $table->unsignedBigInteger('user_id');
+            $table->unique(['book_id', 'user_id']);
             $table->unsignedInteger('rate');
             $table->softDeletes();
             $table->timestamps();
