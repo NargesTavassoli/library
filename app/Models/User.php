@@ -45,4 +45,11 @@ class User extends Authenticatable
     {
         return $this->hasMany(Book::class, 'user_id', 'id');
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class, 'user_id', 'id');
+    }
+
+    protected $with = ['books'];
 }
