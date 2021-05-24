@@ -29,11 +29,6 @@ class RatingsTableSeeder extends Seeder
                     'book_id' => $bookId,
                     'user_id' => $userId,
                 ]);
-//                DB::table('ratings')->insert([
-//                    'book_id' => $bookId,
-//                    'user_id' => $userId,
-//                    'rate' => random_int(1, 5)
-//                ]);
             }
         }
     }
