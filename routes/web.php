@@ -17,4 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/relation', 'HomeController@relation');
+Route::get('/paginate/{id?}', 'BookController@paginate');
+
+
+//Route::get('/relation', 'HomeController@relation');
+
+
+

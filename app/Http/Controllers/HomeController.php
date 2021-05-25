@@ -21,12 +21,27 @@ class HomeController extends Controller
 //        dd($result[2]->user()->value('email'));
 
 
-//        $book = Book::find($id);
+        $book = Book::find($id);
 //        dd($book);
 
-        $user = User::find($id);
-        $result = $user->ratings()->get()->toArray();
+//        $user = User::find($id);
+//        $result = $book->ratings()->get()->toArray();
 
+//        $result = Book::withCount('ratings')->get()->toArray();
+
+//        $result = User::with('books')->get();
+
+        $result = $book->stock->update(['number' => 20]);
         dd($result);
+    }
+
+    public function paginate($user_id = 1)
+    {
+//        $user = User::find($id);
+        $books = Book::paginate(4);
+//        $books = $user->books()->paginate(2);
+//        dd($books);
+//        return $books;
+        return  view('books', compact('books', 'user_id'));
     }
 }

@@ -18,6 +18,8 @@ class Book extends Model
         'price',
     ];
 
+//    protected $perPage = 4;
+
     public function stock()
     {
         return $this->hasOne(Stock::class, 'book_id' , 'id');
