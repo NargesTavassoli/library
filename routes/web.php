@@ -17,7 +17,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/home', 'BookController@index')->middleware('auth')->name('home');
+Route::get('/home', 'BookController@index')->name('home');
 
 
 //Route::get('/relation', 'HomeControllerOld@relation');
