@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-    public function paginate($user_id = 1)
+    public function index()
     {
         $books = Book::simplePaginate(4);
-//        $books = Book::all();
+        $user_id = \Auth::user()->id;
         return  view('books', compact('books', 'user_id'));
     }
 }

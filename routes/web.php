@@ -17,10 +17,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/paginate/{id?}', 'BookController@paginate');
+Route::get('/home', 'BookController@index')->middleware('auth')->name('home');
 
 
-//Route::get('/relation', 'HomeController@relation');
+//Route::get('/relation', 'HomeControllerOld@relation');
 
 
 
+//Route::get('/home', [App\Http\Controllers\HomeControllerOld::class, 'index'])->name('home');
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

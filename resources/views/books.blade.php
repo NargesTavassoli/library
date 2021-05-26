@@ -1,18 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>books</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('content')
 <div class="row">
     <div class="container">
-        <table class="table">
+        <table class="table" >
             <thead>
             <tr>
                 <th scope="col">#</th>
@@ -32,10 +23,10 @@
                     <td>{{ $book->year}}</td>
                     <td>{{$book->price}}</td>
                     <td>
-                        <button class="btn btn-danger">حذف</button>
                         @if($book->user_id == $user_id)
                             <button class="btn btn-info">ویرایش</button>
                         @endif
+                        <button class="btn btn-danger">حذف</button>
                     </td>
                 </tr>
             @endforeach
@@ -47,5 +38,4 @@
 <div>
     {{ $books->links() }}
 </div>
-</body>
-</html>
+@endsection
