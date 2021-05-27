@@ -1,14 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
+    <div class="row" >
+        <div class="container" >
+            <button class="btn btn-info" >ثبت کتاب</button>
+            <button class="btn btn-warning">تاریخچه تغییرات</button>
+
+
+        </div>
+
+    </div>
 <div class="row">
     <div class="container">
+        <br>
         <table class="table" >
             <thead>
             <tr>
                 <th scope="col">نام کتاب</th>
                 <th scope="col">سال نشر</th>
                 <th scope="col">قیمت</th>
+                <th scope="col">امتیاز</th>
+                <th scope="col">ثبت امتیاز</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -17,9 +29,13 @@
             @foreach($books as $book)
                 <tr style="text-align: right;">
                     <td>{{$book->title}}</td>
-{{--                    <td>{{ Verta($book->year)}}</td>--}}
-                    <td>{{ $book->year}}</td>
+                    <td>{{ Verta::instance($book->year)->format('Y')}}</td>
                     <td>{{$book->price}}</td>
+                    <td>{{ round($book->ratings->avg('rate'), 1) }}</td>
+                    <td>
+                        <input type="range" class="form-range" min="1" max="5" step="1" value="{{round($book->ratings->avg('rate'), 1)}}">
+
+                    </td>
                     <td>
                         <button class="btn btn-info">ویرایش</button>
                         @if($book->user_id == $user_id)

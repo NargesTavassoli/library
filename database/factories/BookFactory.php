@@ -25,7 +25,7 @@ class BookFactory extends Factory
             'title' => $this->faker->title(),
             'author' => $this->faker->name(),
             'publisher' => $this->faker->name(),
-            'year' => $this->faker->year(),
+            'year' => $this->faker->date(),
             'price' => $this->faker->numberBetween('50000', '200000'),
 
         ];

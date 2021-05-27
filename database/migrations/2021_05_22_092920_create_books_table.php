@@ -19,7 +19,7 @@ class CreateBooksTable extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('publisher');
-            $table->year('year');
+            $table->timestamp('year');
             $table->unsignedInteger('price');
             $table->boolean('validation')->default(0);
             $table->softDeletes();
