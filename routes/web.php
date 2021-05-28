@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('book.create');
 });
 
 Route::get('/home', 'BookController@index')->name('home');
@@ -29,3 +29,14 @@ Route::get('/home', 'BookController@index')->name('home');
 Auth::routes();
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::prefix('book')->group(function (){
+    Route::get('/create',  'BookController@create');
+    Route::post('/create',  'BookController@create');
+
+    Route::get('/register', 'BookController@create');
+    Route::post('/register', 'BookController@create');
+});
+
+
+
