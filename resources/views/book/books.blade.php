@@ -3,7 +3,7 @@
 @section('content')
     <div class="row">
         <div class="container">
-            <a class="btn btn-info" href="/book/register">ثبت کتاب</a>
+            <a class="btn btn-info" href="/book/create">ثبت کتاب</a>
             <a class="btn btn-warning" href="#">تاریخچه تغییرات</a>
         </div>
     </div>
@@ -37,7 +37,7 @@
                         <td>
                             <a class="btn btn-info" href="/book/edit/{{$book->id}}">ویرایش</a>
                             @if($book->user_id == $user_id)
-                                <button class="btn btn-danger">حذف</button>
+                                <a class="btn btn-danger" href="/book/delete/{{$book->id}}">حذف</a>
                             @endif
                         </td>
                     </tr>

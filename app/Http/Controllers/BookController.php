@@ -58,5 +58,12 @@ class BookController extends Controller
         return  view('book.edit', compact('book'));
     }
 
+    public function delete($id)
+    {
+        $book = Book::findOrFail($id);
+        $book->delete();
+        return redirect()->back();
+    }
+
 
 }

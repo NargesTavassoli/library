@@ -32,11 +32,13 @@ Auth::routes();
 
 Route::prefix('book')->group(function (){
 
-    Route::get('/register', 'BookController@create');
-    Route::post('/register', 'BookController@create')->name('book.create');
+    Route::get('/create', 'BookController@create');
+    Route::post('/create', 'BookController@create')->name('book.create');
 
     Route::get('edit/{id?}', 'BookController@edit');
     Route::post('edit/{id?}', 'BookController@edit')->name('book.edit');
+
+    Route::get('delete/{id}', 'BookController@delete');
 });
 
 
