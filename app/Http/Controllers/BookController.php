@@ -34,6 +34,8 @@ class BookController extends Controller
                 'price' => $request->price,
                 'user_id' => \Auth::user()->id
             ]);
+            return redirect()->route("books.create")->with("successEdit",true);
+
         }
             return view('book.create');
     }

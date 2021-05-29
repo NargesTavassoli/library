@@ -35,7 +35,7 @@ Route::prefix('book')->group(function (){
     Route::post('/create',  'BookController@create');
 
     Route::get('/register', 'BookController@create');
-    Route::post('/register', 'BookController@create');
+    Route::post('/register', 'BookController@create')->name('books.create');
 });
 
 
