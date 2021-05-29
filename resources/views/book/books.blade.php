@@ -35,7 +35,7 @@
 
                         </td>
                         <td>
-                            <button class="btn btn-info">ویرایش</button>
+                            <a class="btn btn-info" href="/book/edit/{{$book->id}}">ویرایش</a>
                             @if($book->user_id == $user_id)
                                 <button class="btn btn-danger">حذف</button>
                             @endif

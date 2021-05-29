@@ -7,10 +7,6 @@
         </div>
     </div>
 
-    @if(session('successCreate'))
-            <script>alert('اطلاعات با موفقیت ثبت شد')</script>
-    @endif
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -18,7 +14,7 @@
                     <div class="card-header" style="text-align: right">{{ __('ثبت کتاب جدید') }}</div>
 
                     <div class="card-body">
-                        <form method="POST" action="/book/create">
+                        <form method="POST" action="{{url("book/edit/" . $book->id)}}">
                             @csrf
                             <div class="form-group row">
                                 <label for="title"
@@ -26,7 +22,7 @@
                                 <div class="col-md-6">
                                     <input id="title" type="text"
                                            class="form-control @error('title') is-invalid @enderror" name="title"
-                                           value="{{ old('title') }}" required autocomplete="title" autofocus>
+                                            required autocomplete="title"  value="{{$book->title}}">
 
                                     @error('title')
                                     <span class="invalid-feedback" role="alert">
@@ -43,7 +39,7 @@
                                 <div class="col-md-6">
                                     <input id="author" type="text"
                                            class="form-control @error('author') is-invalid @enderror" name="author"
-                                           required autocomplete="author">
+                                           required autocomplete="author" value="{{$book->author}}">
 
                                     @error('author')
                                     <span class="invalid-feedback" role="alert">
@@ -60,7 +56,7 @@
                                 <div class="col-md-6">
                                     <input id="" type="text"
                                            class="form-control @error('publisher') is-invalid @enderror"
-                                           name="publisher" required autocomplete="publisher">
+                                           name="publisher" required autocomplete="publisher"  value="{{$book->publisher}}">
 
                                     @error('publisher')
                                     <span class="invalid-feedback" role="alert">
@@ -76,7 +72,7 @@
                                 <div class="col-md-6">
                                     <input id="year" type="date"
                                            class="form-control @error('year') is-invalid @enderror" name="year" required
-                                           autocomplete="year">
+                                           autocomplete="year" value="{{$book->year}}">
 
                                     @error('year')
                                     <span class="invalid-feedback" role="alert">
@@ -92,7 +88,7 @@
                                 <div class="col-md-6">
                                     <input id="price" type="number"
                                            class="form-control @error('price') is-invalid @enderror" name="price"
-                                           required autocomplete="price">
+                                           required autocomplete="price" value="{{$book->price}}">
 
                                     @error('price')
                                     <span class="invalid-feedback" role="alert">
@@ -103,7 +99,7 @@
                             </div>
 
                             <button type="submit" class="btn btn-primary">
-                                {{ __('ثبت') }}
+                                {{ __('ویرایش') }}
                             </button>
                         </form>
                     </div>

@@ -31,11 +31,12 @@ Auth::routes();
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('book')->group(function (){
-    Route::get('/create',  'BookController@create');
-    Route::post('/create',  'BookController@create');
 
     Route::get('/register', 'BookController@create');
-    Route::post('/register', 'BookController@create')->name('books.create');
+    Route::post('/register', 'BookController@create')->name('book.create');
+
+    Route::get('edit/{id?}', 'BookController@edit');
+    Route::post('edit/{id?}', 'BookController@edit')->name('book.edit');
 });
 
 

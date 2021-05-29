@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Rating;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 
@@ -34,9 +35,28 @@ class BookController extends Controller
                 'price' => $request->price,
                 'user_id' => \Auth::user()->id
             ]);
-            return redirect()->route("books.create")->with("successEdit",true);
+            return redirect()->route("book.create")->with("successCreate",true);
 
         }
             return view('book.create');
     }
+
+    public function edit(Request $request, $id)
+    {
+        $book = Book::findOrFail($id);
+        if ($request->isMethod('post')) {
+            $book->update([
+                'title' => $request->title,
+                'author' => $request->author,
+                'publisher' => $request->publisher,
+                'year' => $request->year,
+                'price' => $request->price,
+            ]);
+            return redirect('/home');
+
+        }
+        return  view('book.edit', compact('book'));
+    }
+
+
 }
