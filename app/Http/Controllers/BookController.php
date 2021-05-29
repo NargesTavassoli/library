@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Rating;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -63,6 +64,13 @@ class BookController extends Controller
         $book = Book::findOrFail($id);
         $book->delete();
         return redirect()->back();
+    }
+
+    public function history()
+    {
+        $books = Book::simplePaginate(4);;
+        $users = User::all();
+        return view('book.history', compact('books' , 'users'));
     }
 
 

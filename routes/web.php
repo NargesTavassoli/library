@@ -39,6 +39,8 @@ Route::prefix('book')->group(function (){
     Route::post('edit/{id?}', 'BookController@edit')->name('book.edit');
 
     Route::get('delete/{id}', 'BookController@delete');
+
+    Route::get("/history", 'BookController@history');
 });
 
 
