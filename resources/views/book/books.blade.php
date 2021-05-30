@@ -27,27 +27,32 @@
                 @foreach($books as $book)
 
                     @can('view', $book)
-                    <tr style="text-align: right;">
-                        <td>{{$book->title}}</td>
-                        <td>{{ Verta::instance($book->year)->format('Y')}}</td>
-                        <td>{{$book->price}}</td>
-                        <td>{{$book->stock->number}}</td>
-                        <td>{{ round($book->ratings->avg('rate'), 1) }}</td>
-                        <td>
-                            <input type="range" class="form-range" min="1" max="5" step="1"
-                                   value="{{round($book->ratings->avg('rate'), 1)}}">
+                        <tr style="text-align: right;">
+                            <td>{{$book->title}}</td>
+                            <td>{{ Verta::instance($book->year)->format('Y')}}</td>
+                            <td>{{$book->price}}</td>
+                            <td>
+                                @if($book->stock->number != null)
+                                    {{$book->stock->number}}
+                                @else {{0}}
+                                @endif
+                            </td>
+                            <td>{{ round($book->ratings->avg('rate'), 1) }}</td>
+                            <td>
+                                <input type="range" class="form-range" min="1" max="5" step="1"
+                                       value="{{round($book->ratings->avg('rate'), 1)}}">
 
-                        </td>
-                        <td>
-                            <a class="btn btn-info" href="/book/edit/{{$book->id}}">ویرایش</a>
+                            </td>
+                            <td>
+                                <a class="btn btn-info" href="/book/edit/{{$book->id}}">ویرایش</a>
 
-                            @can('delete-button' , $book)
-                                <a class="btn btn-danger" href="/book/delete/{{$book->id}}">حذف</a>
-                            @else
-                                <a class="btn btn-secondary">حذف</a>
-                            @endcan
-                        </td>
-                    </tr>
+                                @can('delete-button' , $book)
+                                    <a class="btn btn-danger" href="/book/delete/{{$book->id}}">حذف</a>
+                                    {{--                            @else--}}
+                                    {{--                                <a class="btn btn-secondary">حذف</a>--}}
+                                @endcan
+                            </td>
+                        </tr>
                     @endcan
                 @endforeach
                 </tbody>

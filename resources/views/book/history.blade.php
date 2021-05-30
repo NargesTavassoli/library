@@ -21,6 +21,18 @@
 
                 <tbody>
                 @foreach($books as $book)
+
+                    @if($book->deleted_at != null)
+                        <tr style="text-align: right;">
+                            <td> {{'حذف'}} </td>
+                            <td>{{$book->title}}</td>
+                            <td>
+                                {{ Verta::instance($book->deleted_at)->format('h:m y/m/d')}}
+                            </td>
+                            <td>{{ $book->user->name }}</td>
+                        </tr>
+                    @endif
+
                     <tr style="text-align: right;">
                         <td>
                             @if($book->updated_at > $book->created_at)
@@ -28,14 +40,14 @@
                             @else
                                 {{'ثبت'}}
                             @endif
-                            </td>
+                        </td>
                         <td>{{$book->title}}</td>
                         <td>
-                                @if($book->updated_at > $book->created_at)
-                                    {{ Verta::instance($book->updated_at)->format('h:m y/m/d')}}
-                                @else
-                                    {{Verta::instance($book->created_at)->format('h:m y/m/d')}}
-                                @endif
+                            @if($book->updated_at > $book->created_at)
+                                {{ Verta::instance($book->updated_at)->format('h:m y/m/d')}}
+                            @else
+                                {{Verta::instance($book->created_at)->format('h:m y/m/d')}}
+                            @endif
                         </td>
 
                         <td>{{ $book->user->name }}</td>

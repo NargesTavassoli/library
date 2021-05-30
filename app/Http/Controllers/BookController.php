@@ -38,6 +38,8 @@ class BookController extends Controller
                 'price' => $request->price,
                 'user_id' => \Auth::user()->id
             ]);
+            $stock = new Stock();
+            
             return redirect()->route("book.create")->with("successCreate",true);
 
         }
