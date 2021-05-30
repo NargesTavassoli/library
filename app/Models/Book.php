@@ -20,7 +20,7 @@ class Book extends Model
         'price',
     ];
 
-//    protected $perPage = 4;
+    protected $perPage = 4;
 
     public function stock()
     {

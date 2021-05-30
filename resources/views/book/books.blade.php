@@ -4,7 +4,10 @@
     <div class="row">
         <div class="container">
             <a class="btn btn-info" href="/book/create">ثبت کتاب</a>
-            <a class="btn btn-warning" href="/book/history">تاریخچه تغییرات</a>
+            <a class="btn btn-info" href="/book/history">تاریخچه تغییرات</a>
+            @can('admin')
+                <a class="btn btn-warning" href="/book/validation">تایید نشده</a>
+            @endcan
         </div>
     </div>
     <div class="row">

@@ -41,6 +41,8 @@ Route::prefix('book')->group(function (){
     Route::get('delete/{id}', 'BookController@delete');
 
     Route::get("/history", 'BookController@history');
+
+    Route::get("/validation", 'StockController@validation');
 });
 
 

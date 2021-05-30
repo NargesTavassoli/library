@@ -39,7 +39,7 @@ class BookController extends Controller
                 'user_id' => \Auth::user()->id
             ]);
             $stock = new Stock();
-            
+
             return redirect()->route("book.create")->with("successCreate",true);
 
         }

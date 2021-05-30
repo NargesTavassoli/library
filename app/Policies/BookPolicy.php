@@ -37,6 +37,21 @@ class BookPolicy
     }
 
     /**
+     * Determine whether the user can validation the model.
+     *
+     * @param  \App\Models\User  $user
+     * @param  \App\Models\Book  $book
+     * @return mixed
+     */
+    public function validation(User $user, Book $book)
+    {
+        if($book->validation === 0)
+        {
+            return true;
+        }
+    }
+
+    /**
      * Determine whether the user can create models.
      *
      * @param  \App\Models\User  $user
