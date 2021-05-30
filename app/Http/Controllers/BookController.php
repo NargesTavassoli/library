@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Rating;
+use App\Models\Stock;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
@@ -20,8 +21,9 @@ class BookController extends Controller
     {
         $books = Book::simplePaginate(4);
         $ratings = Rating::all();
-        $user_id = \Auth::user()->id;
-        return view('book.books', compact('books', 'user_id', 'ratings'));
+        $stock = Stock::all();
+
+        return view('book.books', compact('books', 'ratings', 'stock'));
     }
 
     public function create(Request $request)
@@ -62,7 +64,10 @@ class BookController extends Controller
     public function delete($id)
     {
         $book = Book::findOrFail($id);
-        $book->delete();
+        if(\Gate::allows('delete', $book));
+       {
+            $book->delete();
+        }
         return redirect()->back();
     }
 

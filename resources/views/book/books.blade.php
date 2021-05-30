@@ -16,6 +16,7 @@
                     <th scope="col">نام کتاب</th>
                     <th scope="col">سال نشر</th>
                     <th scope="col">قیمت</th>
+                    <th scope="col">موجودی</th>
                     <th scope="col">امتیاز</th>
                     <th scope="col">ثبت امتیاز</th>
                     <th scope="col"></th>
@@ -24,10 +25,13 @@
 
                 <tbody>
                 @foreach($books as $book)
+
+                    @can('view', $book)
                     <tr style="text-align: right;">
                         <td>{{$book->title}}</td>
                         <td>{{ Verta::instance($book->year)->format('Y')}}</td>
                         <td>{{$book->price}}</td>
+                        <td>{{$book->stock->number}}</td>
                         <td>{{ round($book->ratings->avg('rate'), 1) }}</td>
                         <td>
                             <input type="range" class="form-range" min="1" max="5" step="1"
@@ -36,11 +40,15 @@
                         </td>
                         <td>
                             <a class="btn btn-info" href="/book/edit/{{$book->id}}">ویرایش</a>
-                            @if($book->user_id == $user_id)
+
+                            @can('delete-button' , $book)
                                 <a class="btn btn-danger" href="/book/delete/{{$book->id}}">حذف</a>
-                            @endif
+                            @else
+                                <a class="btn btn-secondary">حذف</a>
+                            @endcan
                         </td>
                     </tr>
+                    @endcan
                 @endforeach
                 </tbody>
             </table>
