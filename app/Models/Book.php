@@ -18,6 +18,7 @@ class Book extends Model
         'publisher',
         'year',
         'price',
+        'validation',
     ];
 
     protected $perPage = 4;

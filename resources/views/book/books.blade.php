@@ -51,8 +51,6 @@
 
                                 @can('delete-button' , $book)
                                     <a class="btn btn-danger" href="/book/delete/{{$book->id}}">حذف</a>
-                                    {{--                            @else--}}
-                                    {{--                                <a class="btn btn-secondary">حذف</a>--}}
                                 @endcan
                             </td>
                         </tr>

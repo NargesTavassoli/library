@@ -6,7 +6,6 @@ use App\Models\Book;
 use App\Models\Rating;
 use App\Models\Stock;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 
@@ -19,7 +18,7 @@ class BookController extends Controller
 
     public function index()
     {
-        $books = Book::simplePaginate(4);
+        $books = Book::where('validation', '=', 1)->simplePaginate(4);
         $ratings = Rating::all();
         $stock = Stock::all();
 
@@ -38,10 +37,7 @@ class BookController extends Controller
                 'price' => $request->price,
                 'user_id' => \Auth::user()->id
             ]);
-            $stock = new Stock();
-
             return redirect()->route("book.create")->with("successCreate",true);
-
         }
             return view('book.create');
     }
