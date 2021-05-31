@@ -25,21 +25,26 @@
                 @foreach($books as $book)
 
                     @can('validation', $book)
-                        <tr style="text-align: right;">
-                            <td>{{$book->id}}</td>
-                            <td>{{$book->title}}</td>
-                            <td>{{ Verta::instance($book->year)->format('Y')}}</td>
-                            <td>{{$book->price}}</td>
-                            <td>
-                                <form action="">
-                                    <input type="number" name="stock" >
-                                </form>
-                            </td>
-                            <td>
-                                <a class="btn btn-info" href="/book/edit/{{$book->id}}">ثبت</a>
+                        <form method="POST" action="{{url("book/stock/" . $book->id)}}">
+                            <tr style="text-align: right;">
+                                <td>{{$book->id}}</td>
+                                <td>{{$book->title}}</td>
+                                <td>{{ Verta::instance($book->year)->format('Y')}}</td>
+                                <td>{{$book->price}}</td>
+                                <td>
 
-                            </td>
-                        </tr>
+                                    @csrf
+                                    <input id="stock" type="number" name="stock"
+                                           class="form-control @error('stock') is-invalid @enderror" name="stock"
+                                           required
+                                           autocomplete="stock" style="width: auto">
+                                </td>
+                                <td>
+                                    <button type="submit" class="btn btn-info">ثبت</button>
+                                    <a class="btn btn-danger" href="/book/delete/{{$book->id}}">عدم تایید</a>
+                                </td>
+                            </tr>
+                        </form>
                     @endcan
                 @endforeach
                 </tbody>
