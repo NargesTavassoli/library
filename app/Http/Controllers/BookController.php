@@ -37,9 +37,9 @@ class BookController extends Controller
                 'price' => $request->price,
                 'user_id' => \Auth::user()->id
             ]);
-            return redirect()->route("book.create")->with("successCreate",true);
+            return redirect()->route("book.create")->with("successCreate", true);
         }
-            return view('book.create');
+        return view('book.create');
     }
 
     public function edit(Request $request, $id)
@@ -56,14 +56,14 @@ class BookController extends Controller
             return redirect('/home');
 
         }
-        return  view('book.edit', compact('book'));
+        return view('book.edit', compact('book'));
     }
 
     public function delete($id)
     {
         $book = Book::findOrFail($id);
-        if(\Gate::allows('delete', $book));
-       {
+        if (\Gate::allows('delete', $book)) ;
+        {
             $book->delete();
         }
         return redirect()->back();
@@ -73,8 +73,27 @@ class BookController extends Controller
     {
         $books = Book::simplePaginate(4);;
         $users = User::all();
-        return view('book.history', compact('books' , 'users'));
+        return view('book.history', compact('books', 'users'));
     }
 
-
+    public function rating(Request $request, $book_id)
+    {
+        if ($request->isMethod('post')) {
+            $user_id = \Auth::user()->id;
+            $rate = Rating::where('user_id', '=', $user_id)->where('book_id', '=', $book_id);
+            if($rate->exists()){
+                $rate->update([
+                    'rate' => $request->rate,
+                ]);
+            } else {
+                $rate = new Rating;
+                $rate->create([
+                    'book_id' => $book_id,
+                    'user_id' => $user_id,
+                    'rate' => $request->rate,
+                ]);
+            }
+        }
+        return redirect()->back();
+    }
 }

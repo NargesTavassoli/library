@@ -15,7 +15,7 @@
                     <th scope="col">id</th>
                     <th scope="col">نام کتاب</th>
                     <th scope="col">سال نشر</th>
-                    <th scope="col">قیمت</th>
+                    <th scope="col">قیمت (تومان)</th>
                     <th scope="col">موجودی</th>
                     <th scope="col"></th>
                 </tr>
@@ -26,14 +26,13 @@
 
                     @can('validation', $book)
                         <form method="POST" action="{{url("book/stock/" . $book->id)}}">
+                            @csrf
                             <tr style="text-align: right;">
                                 <td>{{$book->id}}</td>
                                 <td>{{$book->title}}</td>
                                 <td>{{ Verta::instance($book->year)->format('Y')}}</td>
                                 <td>{{$book->price}}</td>
                                 <td>
-
-                                    @csrf
                                     <input id="stock" type="number" name="stock"
                                            class="form-control @error('stock') is-invalid @enderror" name="stock"
                                            required

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Stock;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 
@@ -26,9 +25,6 @@ class StockController extends Controller
 
     public function stock(Request $request, $id)
     {
-//        dd($request->toArray());
-//        $stock = new Stock();
-//        $stock = Stock::where('book_id', '=', $id)->exists();
         $stock = Stock::findOrFail($id);
        if (! $stock->exists()) {
            $stock = new Stock();
@@ -39,14 +35,12 @@ class StockController extends Controller
        }
        else
        {
-//           dd($stock);
            $stock->update([
                'number' => $request->stock,
            ]);
        }
 
         $book = Book::find($id);
-//        dd($book);
         $book->update([
             'validation' => 1
         ]);
