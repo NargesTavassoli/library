@@ -13,45 +13,32 @@
                 <thead>
                 <tr>
                     <th scope="col">عملیات</th>
+                    <th scope="col">توسط کاربر</th>
                     <th scope="col">نام کتاب</th>
                     <th scope="col">زمان</th>
-                    <th scope="col">نام کاربر</th>
+
                 </tr>
                 </thead>
 
                 <tbody>
-                @foreach($books as $book)
-
-                    @if($book->deleted_at != null)
-                        <tr style="text-align: right;">
-                            <td> {{'حذف'}} </td>
-                            <td>{{$book->title}}</td>
-                            <td>
-                                {{ Verta::instance($book->deleted_at)->format('h:m y/m/d')}}
-                            </td>
-                            <td>{{ $book->user->name }}</td>
-                        </tr>
-                    @endif
-
+                @foreach($logs as $log)
                     <tr style="text-align: right;">
                         <td>
-                            @if($book->updated_at > $book->created_at)
+                            @switch($log->event)
+                                @case('deleted')
+                                {{'حذف'}}
+                                @break
+                                @case('updated')
                                 {{'ویرایش'}}
-                            @else
+                                @break
+                                @case('created')
                                 {{'ثبت'}}
-                            @endif
+                                @break
+                            @endswitch
                         </td>
-                        <td>{{$book->title}}</td>
-                        <td>
-                            @if($book->updated_at > $book->created_at)
-                                {{ Verta::instance($book->updated_at)->format('h:m y/m/d')}}
-                            @else
-                                {{Verta::instance($book->created_at)->format('h:m y/m/d')}}
-                            @endif
-                        </td>
-
-                        <td>{{ $book->user->name }}</td>
-
+                        <td>{{ \App\Models\User::find($log->causer_id)->name }}</td>
+                        <td>{{ \App\Models\Book::withTrashed()->find($log->subject_id)->title }}</td>
+                        <td>{{ Verta::instance($log->created_at)->format('h:m y/m/d')}}</td>
                     </tr>
                 @endforeach
                 </tbody>
@@ -60,6 +47,6 @@
     </div>
     <hr>
     <div>
-        {{ $books->links() }}
+{{--        {{ $logs->links() }}--}}
     </div>
 @endsection

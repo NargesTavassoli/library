@@ -2,18 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ActivityLog;
 use App\Models\Book;
 use App\Models\Rating;
 use App\Models\Stock;
-use App\Models\User;
 use Illuminate\Http\Request;
-
+use Spatie\Activitylog\Models\Activity;
 
 class BookController extends Controller
 {
+
     public function __construct()
     {
         $this->middleware('auth');
+        Activity::all();
     }
 
     public function index()
@@ -71,9 +73,8 @@ class BookController extends Controller
 
     public function history()
     {
-        $books = Book::simplePaginate(4);;
-        $users = User::all();
-        return view('book.history', compact('books', 'users'));
+        $logs = ActivityLog::query()->orderBy('created_at', 'DESC')->get();
+        return view('book.history', compact('logs'));
     }
 
     public function rating(Request $request, $book_id)
@@ -96,4 +97,5 @@ class BookController extends Controller
         }
         return redirect()->back();
     }
+
 }

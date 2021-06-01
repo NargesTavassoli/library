@@ -13,22 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('book.create');
-});
+Route::get('/', 'BookController@index');
 
 Route::get('/home', 'BookController@index')->name('home');
 
 
-//Route::get('/relation', 'HomeControllerOld@relation');
-
-
-
-//Route::get('/home', [App\Http\Controllers\HomeControllerOld::class, 'index'])->name('home');
-
 Auth::routes();
 
-//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::prefix('book')->group(function (){
 
@@ -42,7 +33,11 @@ Route::prefix('book')->group(function (){
 
     Route::get("/history", 'BookController@history');
 
-    Route::get("/validation", 'StockController@validation');
+    Route::get("/validation/{id?}", 'StockController@validation');
+
+    Route::post("/stock/{id?}", 'StockController@stock');
+
+    Route::post("/rating/{id?}", 'BookController@rating');
 });
 
 
