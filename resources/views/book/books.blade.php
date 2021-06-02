@@ -17,6 +17,8 @@
                 <thead>
                 <tr>
                     <th scope="col">نام کتاب</th>
+                    <th scope="col">نویسنده</th>
+                    <th scope="col">ناشر</th>
                     <th scope="col">سال نشر</th>
                     <th scope="col">قیمت (تومان)</th>
                     <th scope="col">موجودی</th>
@@ -31,6 +33,8 @@
 
                     @can('view', $book)
                         <tr style="text-align: right;">
+                            <td>{{$book->author}}</td>
+                            <td>{{$book->publisher}}</td>
                             <td>{{$book->title}}</td>
                             <td>{{ Verta::instance($book->year)->format('Y')}}</td>
                             <td>{{$book->price}}</td>

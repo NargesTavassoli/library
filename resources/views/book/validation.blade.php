@@ -12,8 +12,9 @@
             <table class="table">
                 <thead>
                 <tr>
-                    <th scope="col">id</th>
                     <th scope="col">نام کتاب</th>
+                    <th scope="col">نویسنده</th>
+                    <th scope="col">ناشر</th>
                     <th scope="col">سال نشر</th>
                     <th scope="col">قیمت (تومان)</th>
                     <th scope="col">موجودی</th>
@@ -23,13 +24,13 @@
 
                 <tbody>
                 @foreach($books as $book)
-
                     @can('validation', $book)
                         <form method="POST" action="{{url("book/stock/" . $book->id)}}">
                             @csrf
                             <tr style="text-align: right;">
-                                <td>{{$book->id}}</td>
                                 <td>{{$book->title}}</td>
+                                <td>{{$book->author}}</td>
+                                <td>{{$book->publisher}}</td>
                                 <td>{{ Verta::instance($book->year)->format('Y')}}</td>
                                 <td>{{$book->price}}</td>
                                 <td>

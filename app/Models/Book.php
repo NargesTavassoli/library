@@ -38,7 +38,7 @@ class Book extends Model
     {
         return $this->hasMany(Rating::class, 'book_id', 'id');
     }
-    
+
 
     public function getActivitylogOptions(): LogOptions
     {
